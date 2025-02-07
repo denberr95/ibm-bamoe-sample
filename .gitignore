@@ -8,6 +8,7 @@ bin/
 .flattend-pom.xml
 *.pid
 *.port
+transaction-logs/
 
 ### STS ###
 .apt_generated
