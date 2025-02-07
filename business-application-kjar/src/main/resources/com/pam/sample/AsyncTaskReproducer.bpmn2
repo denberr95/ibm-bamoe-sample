@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_qC6S4Io-ED2eYdIdsT2_qg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_9qMPIMeBED2tHMOsG_hPTw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_codicePraticaHubItem" structureRef="String"/>
   <bpmn2:signal id="_-542048624" name="SignalX"/>
-  <bpmn2:collaboration id="_050C2FFD-658E-4D0E-9EF8-E44869442BAE" name="Default Collaboration">
-    <bpmn2:participant id="_9ABFEBBF-F49A-4106-9EFD-AB0DBEC28F7C" name="Pool Participant" processRef="AsyncTaskReproducer"/>
+  <bpmn2:collaboration id="_7531E52B-B3C4-4F05-9CA5-2F0744E5BADD" name="Default Collaboration">
+    <bpmn2:participant id="_3931BD6D-635F-419F-9D35-222B2FFA0F3A" name="Pool Participant" processRef="AsyncTaskReproducer"/>
   </bpmn2:collaboration>
   <bpmn2:process id="AsyncTaskReproducer" drools:packageName="com.pam.sample" drools:version="1.0" drools:adHoc="false" name="AsyncTaskReproducer" isExecutable="true" processType="Public">
     <bpmn2:property id="codicePraticaHub" itemSubjectRef="_codicePraticaHubItem" name="codicePraticaHub"/>
@@ -24,23 +24,21 @@
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_DD9BBE66-31DE-48A2-8B0F-D0150B506B70" sourceRef="_1309A62E-CEE9-4566-9C06-5972A60114A3" targetRef="_57BF29EA-A2FB-4EE4-8EB2-E619614A7FA9"/>
-    <bpmn2:endEvent id="_DDDC44D6-481C-4AB7-A21F-477F88270F07" name="T2">
+    <bpmn2:endEvent id="_DDDC44D6-481C-4AB7-A21F-477F88270F07" name="E2">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[T2]]></drools:metaValue>
+          <drools:metaValue><![CDATA[E2]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_3DBE02C0-3FCF-4332-8BAB-0149806C7AB1</bpmn2:incoming>
-      <bpmn2:terminateEventDefinition/>
     </bpmn2:endEvent>
-    <bpmn2:endEvent id="_86C086E8-9ADE-46F0-865E-90676B61A51D" name="T1">
+    <bpmn2:endEvent id="_86C086E8-9ADE-46F0-865E-90676B61A51D" name="E1">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[T1]]></drools:metaValue>
+          <drools:metaValue><![CDATA[E1]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_65A515E1-67DF-4015-ADEF-F9186FC9300A</bpmn2:incoming>
-      <bpmn2:terminateEventDefinition/>
     </bpmn2:endEvent>
     <bpmn2:parallelGateway id="_57BF29EA-A2FB-4EE4-8EB2-E619614A7FA9" name="P1" gatewayDirection="Diverging">
       <bpmn2:extensionElements>
@@ -161,7 +159,7 @@
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_qC6S4Io-ED2eYdIdsT2_qg</bpmn2:source>
-    <bpmn2:target>_qC6S4Io-ED2eYdIdsT2_qg</bpmn2:target>
+    <bpmn2:source>_9qMPIMeBED2tHMOsG_hPTw</bpmn2:source>
+    <bpmn2:target>_9qMPIMeBED2tHMOsG_hPTw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>

@@ -3,6 +3,7 @@ WORKDIR /app
 COPY src/ src/
 COPY pom.xml pom.xml
 COPY settings.xml settings.xml
+COPY lombok.config lombok.config
 RUN mvn clean package --file pom.xml --settings settings.xml
 
 FROM eclipse-temurin:11-jre-ubi9-minimal AS runtime

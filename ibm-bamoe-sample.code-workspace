@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "business-application-kjar"
+		},
+		{
+			"path": "business-application-service"
+		}
+	],
+    "settings": {
+        "sqltools.connections": [
+            {
+                "previewLimit": 50,
+                "server": "localhost",
+                "port": 5432,
+                "driver": "PostgreSQL",
+                "name": "bpm",
+                "group": "local",
+                "database": "bpm",
+                "username": "fakeuser",
+                "password": ""
+            }
+        ]
+    }
+}
