@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <appender name="CONSOLE-TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>false</withJansi>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%green(%date)] - [%yellow(%thread)] - [%magenta(%logger)] - [%highlight(%level)] - [%blue(%mdc)] - [%white(%message)]%red(%n%throwable)</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/bpm-application.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>[%date] - [%thread] - [%logger] - [%level] - [%mdc] - [%message]%n%throwable</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.jboss" level="ERROR" />
+    <logger name="org.xnio" level="ERROR" />
+    <logger name="org.quartz" level="INFO" />
+    <logger name="org.jbpm" level="INFO" />
+    <logger name="org.kie" level="INFO" />
+    <logger name="org.drools" level="INFO" />
+    <logger name="com.arjuna" level="ERROR" />
+    <logger name="org.apache" level="ERROR" />
+    <logger name="org.eclipse" level="ERROR" />
+    <logger name="org.appformer" level="ERROR" />
+    <logger name="com.pam.sample" level="INFO" />
+    <logger name="io.undertow" level="ERROR" />
+    <logger name="org.hibernate" level="INFO" />
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE-TEXT" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>

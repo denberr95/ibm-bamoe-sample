@@ -1,0 +1,108 @@
+services:
+
+  bpmdb:
+    image: postgres:latest
+    restart: "no"
+    environment:
+      POSTGRES_USER: fakeuser
+      POSTGRES_PASSWORD:
+      POSTGRES_DB: bpm
+      POSTGRES_HOST_AUTH_METHOD: trust
+      TZ: Europe/Rome
+    ports:
+    - "5432:5432" # serve database
+    networks:
+    - jbpm-dev
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    restart: "no"
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+      TZ: Europe/Rome
+    ports:
+    - "6831" # accept jaeger.thrift over Thrift-compact protocol (used by most SDKs)
+    - "6832" # accept jaeger.thrift over Thrift-binary protocol (used by Node.js SDK)
+    - "5778" # serve configs (sampling, etc.)
+    - "16686:16686" # serve frontend
+    - "4317" # accept OpenTelemetry Protocol (OTLP) over gRPC
+    - "4318" # accept OpenTelemetry Protocol (OTLP) over HTTP
+    - "14268" # accept jaeger.thrift directly from clients
+    - "14250" # accept model.proto
+    - "9411" # Zipkin compatible endpoint (optional)
+    networks:
+    - jbpm-dev
+
+  loki:
+    image: grafana/loki:main
+    restart: "no"
+    environment:
+      TZ: Europe/Rome
+    command: 
+    - -config.file=/etc/loki/local-config.yaml
+    volumes:
+    - ./loki/local-config.yaml:/etc/loki/local-config.yaml
+    ports:
+    - "3100" # serve http server
+    - "9096" # serve grpc server
+    networks:
+    - jbpm-dev
+
+  prometheus:
+    image: prom/prometheus:main
+    restart: "no"
+    environment:
+      TZ: Europe/Rome
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    - ./prometheus/prometheus-config.yml:/etc/prometheus/prometheus.yml
+    ports:
+    - "9090:9090" # serve frontend
+    networks:
+    - jbpm-dev
+    depends_on:
+    - otelcol
+
+  grafana:
+    image: grafana/grafana:main
+    restart: "no"
+    environment:
+      TZ: Europe/Rome
+    volumes:
+    - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+    - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+    - "3000:3000" # serve frontend
+    networks:
+    - jbpm-dev
+    depends_on:
+    - prometheus
+    - loki
+    - jaeger
+
+  otelcol:
+    image: otel/opentelemetry-collector-contrib:latest
+    restart: "no"
+    environment:
+      TZ: Europe/Rome
+    command:
+    - --config=/etc/otelcol-config.yml
+    volumes:
+    - ./otel/otelcol-config.yml:/etc/otelcol-config.yml
+    ports:
+    - "1888" # pprof extension
+    - "8888" # Prometheus metrics exposed by the Collector
+    - "8889" # Prometheus exporter metrics
+    - "13133" # health_check extension
+    - "4317:4317" # OTLP gRPC receiver
+    - "4318:4318" # OTLP http receiver
+    - "55679" # zpages extension
+    depends_on:
+    - jaeger
+    networks:
+    - jbpm-dev
+
+networks:
+  jbpm-dev:
+    driver: bridge

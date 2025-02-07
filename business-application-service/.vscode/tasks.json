@@ -1,0 +1,138 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cleanup-env",
+            "type": "shell",
+            "group": "none",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "podman-container-remove",
+                "podman-volume-remove",
+                "podman-system-prune",
+                "shell-cleanup-folders",
+            ]
+        },
+        {
+            "label": "start-podman-env",
+            "type": "shell",
+            "group": "none",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "podman-container-remove",
+                "podman-volume-remove",
+                "shell-cleanup-folders",
+                "podman-compose-env-up",
+                "mvn-clean",
+                "mvn-compile",
+            ]
+        },
+        {
+            "label": "stop-podman-env",
+            "type": "shell",
+            "group": "none",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "podman-compose-env-stop",
+            ]
+        },
+        {
+            "label": "shell-cleanup-folders",
+            "type": "shell",
+            "command": "rm -rf bin logs",
+            "group": "none",
+        },
+        {
+            "label": "podman-volume-remove",
+            "type": "shell",
+            "command": "podman volume rm --force --all",
+            "group": "none",
+        },
+        {
+            "label": "podman-container-remove",
+            "type": "shell",
+            "command": "podman container rm --force --all",
+            "group": "none",
+        },
+        {
+            "label": "podman-system-prune",
+            "type": "shell",
+            "command": "podman system prune --force --all --volumes",
+            "group": "none",
+        },
+        {
+            "label": "podman-compose-env-up",
+            "type": "shell",
+            "command": "podman-compose --file ./collections/compose.yaml up --force-recreate --remove-orphans --detach",
+            "group": "test",
+        },
+        {
+            "label": "podman-compose-env-stop",
+            "type": "shell",
+            "command": "podman-compose --file ./collections/compose.yaml stop",
+            "group": "test",
+        },
+        {
+            "label": "podman-machine-init",
+            "type": "shell",
+            "command": "podman machine init podman-machine-default",
+            "group": "none",
+        },
+        {
+            "label": "podman-machine-start",
+            "type": "shell",
+            "command": "podman machine start podman-machine-default",
+            "group": "none",
+        },
+        {
+            "label": "podman-machine-stop",
+            "type": "shell",
+            "command": "podman machine stop podman-machine-default",
+            "group": "none",
+        },
+        {
+            "label": "podman-machine-remove",
+            "type": "shell",
+            "command": "podman machine rm podman-machine-default --force",
+            "group": "none",
+        },
+        {
+            "label": "mvn-test",
+            "type": "shell",
+            "command": "mvn test --file pom.xml",
+            "group": "test",
+        },
+        {
+            "label": "mvn-clean",
+            "type": "shell",
+            "command": "mvn clean --file pom.xml",
+            "group": "build",
+        },
+        {
+            "label": "mvn-compile",
+            "type": "shell",
+            "command": "mvn compile --file pom.xml",
+            "group": "build",
+        },
+        {
+            "label": "mvn-package",
+            "type": "shell",
+            "command": "mvn package --file pom.xml",
+            "group": "build",
+        },
+        {
+            "label": "mvn-dependencies-tree",
+            "type": "shell",
+            "command": "mvn dependency:tree --file pom.xml 1> logs/maven-dependency-tree.log",
+            "group": "none",
+        },
+        {
+            "label": "mvn-display-versions-updates",
+            "type": "shell",
+            "command": "mvn versions:display-dependency-updates --file pom.xml 1> logs/maven-dependency-updates.log",
+            "group": "none",
+        },
+    ]
+}

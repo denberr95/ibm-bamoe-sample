@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch BPM App PostgreSQL",
+            "request": "launch",
+            "mainClass": "com.pam.sample.BPMApplication",
+            "projectName": "business-application-service",
+            "vmArgs": "-Xms128m -Xmx256m -Dspring.profiles.active=postgres",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "start-podman-env",
+            "postDebugTask": "stop-podman-env"
+        }
+    ]
+}
