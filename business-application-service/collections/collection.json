@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b65ecec7-afc5-408d-9176-b504eb2ddeb9",
+		"_postman_id": "8447cafd-9506-4335-9041-094186203d3c",
 		"name": "business-application-service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4578942"
@@ -107,7 +107,7 @@
 						},
 						{
 							"key": "processInstanceId",
-							"value": ""
+							"value": "1"
 						}
 					]
 				}
@@ -201,7 +201,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"21871185-ba0e-4066-94e3-18b2b8fa947d\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
+					"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"25feeb1a-0cbb-4ea4-9818-6824fdbea12a\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -263,7 +263,7 @@
 						},
 						{
 							"key": "processInstanceId",
-							"value": "2"
+							"value": "1"
 						}
 					]
 				}
@@ -324,6 +324,57 @@
 						{
 							"key": "variableId",
 							"value": "isClose"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Node Instance by Process Instance ID",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app-api/server/admin/containers/:containerId/processes/instances/:processInstanceId/nodeinstances",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app-api",
+						"server",
+						"admin",
+						"containers",
+						":containerId",
+						"processes",
+						"instances",
+						":processInstanceId",
+						"nodeinstances"
+					],
+					"variable": [
+						{
+							"key": "containerId",
+							"value": "business-application-kjar-1.0.0-SNAPSHOT"
+						},
+						{
+							"key": "processInstanceId",
+							"value": "1"
 						}
 					]
 				}
