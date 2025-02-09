@@ -9,22 +9,27 @@ import org.jbpm.services.api.ProcessService;
 import org.kie.internal.KieInternalServices;
 import org.kie.internal.process.CorrelationKey;
 import org.kie.internal.process.CorrelationKeyFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.Scope;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class BusinessService {
 
     private final Tracer tracer;
     private final ProcessService processService;
     private final CorrelationKeyFactory correlationKeyFactory =
             KieInternalServices.Factory.get().newCorrelationKeyFactory();
+
+    private static final Logger log = LoggerFactory.getLogger(BusinessService.class);
+
+    public BusinessService(Tracer tracer, ProcessService processService) {
+        this.tracer = tracer;
+        this.processService = processService;
+    }
 
     public StartProcessResponseDTO startProcess(final StartProcessDTO request) {
         Span span = this.tracer.spanBuilder("startProcess").startSpan();

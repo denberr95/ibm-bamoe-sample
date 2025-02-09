@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 
-@Configuration("kieServerSecurity")
+@Configuration(value = "kieServerSecurity", proxyBeanMethods = false)
 public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override

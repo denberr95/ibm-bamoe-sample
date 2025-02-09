@@ -25,6 +25,10 @@
         <narayana.version>5.9.0.Final</narayana.version>
         <version.business-application-kjar>1.0.0-SNAPSHOT</version.business-application-kjar>
         <version.opentelemetry-instrumentation-bom>2.12.0</version.opentelemetry-instrumentation-bom>
+        <postgresql.version>42.7.5</postgresql.version>
+        <snakeyaml.version>2.3</snakeyaml.version>
+        <!-- <undertow.version>2.3.18.Final</undertow.version> -->
+        <!-- <logback.version>1.5.16</logback.version> -->
     </properties>
 
     <dependencyManagement>
@@ -102,13 +106,9 @@
             <version>${version.business-application-kjar}</version>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
