@@ -1,5 +1,7 @@
 package com.pam.sample.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import com.pam.sample.model.StartProcessDTO;
 import com.pam.sample.model.StartProcessResponseDTO;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.Scope;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 @Service
 public class BusinessService {
@@ -60,12 +63,19 @@ public class BusinessService {
                     request.getSignalName(), request.getParameters());
             log.info("Signal activated !");
             span.addEvent("Signal activated");
-            span.setAttribute("signalName", request.getSignalName());
+            span.setAttribute(Constants.SPAN_KEY_SIGNAL_NAME, request.getSignalName());
             span.setAttribute(Constants.SPAN_KEY_PROCESS_INSTANCE_ID,
                     request.getProcessInstanceId());
             span.setAttribute(Constants.SPAN_KEY_CORRELATION_KEY, request.getCorrelationKey());
         } finally {
             span.end();
         }
+    }
+
+    @WithSpan
+    public List<String> environments() {
+        List<String> result = new ArrayList<>();
+        System.getenv().forEach((k, v) -> result.add(new String(v.getBytes())));
+        return result;
     }
 }
