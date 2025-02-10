@@ -57,10 +57,17 @@ public class BusinessService {
     }
 
     public void wakeUpSignal(final WakeUpSignalDTO request) {
-        Span span = this.tracer
-                .spanBuilder(StackWalker.getInstance()
-                        .walk(frames -> frames.skip(1).findFirst().get().getMethodName()))
-                .startSpan();
+        String classAndMethod =
+                StackWalker.getInstance()
+                        .walk(frames -> frames
+                                .dropWhile(f -> f.getClassName().startsWith("java.")
+                                        || f.getClassName().startsWith("jdk."))
+                                .findFirst().map(f -> {
+                                    String className = f.getClassName()
+                                            .substring(f.getClassName().lastIndexOf('.') + 1);
+                                    return className + "." + f.getMethodName();
+                                }).orElse("UnknownMethod"));
+        Span span = this.tracer.spanBuilder(classAndMethod).startSpan();
         try (Scope scope = span.makeCurrent()) {
             this.processService.signalProcessInstance(request.getProcessInstanceId(),
                     request.getSignalName(), request.getParameters());
