@@ -57,7 +57,10 @@ public class BusinessService {
     }
 
     public void wakeUpSignal(final WakeUpSignalDTO request) {
-        Span span = this.tracer.spanBuilder("wakeUpSignal").startSpan();
+        Span span = this.tracer
+                .spanBuilder(StackWalker.getInstance()
+                        .walk(frames -> frames.skip(1).findFirst().get().getMethodName()))
+                .startSpan();
         try (Scope scope = span.makeCurrent()) {
             this.processService.signalProcessInstance(request.getProcessInstanceId(),
                     request.getSignalName(), request.getParameters());
