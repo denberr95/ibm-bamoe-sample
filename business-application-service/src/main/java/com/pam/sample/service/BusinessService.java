@@ -35,7 +35,7 @@ public class BusinessService {
     }
 
     public StartProcessResponseDTO startProcess(final StartProcessDTO request) {
-        Span span = this.tracer.spanBuilder("startProcess").startSpan();
+        Span span = this.tracer.spanBuilder("BusinessService.startProcess").startSpan();
         StartProcessResponseDTO result = new StartProcessResponseDTO();
         try (Scope scope = span.makeCurrent()) {
             CorrelationKey newCorrelationKey =

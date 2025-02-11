@@ -201,7 +201,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"25feeb1a-0cbb-4ea4-9818-6824fdbea12a\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
+					"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"c3f934bd-27af-46ce-9e2e-a4dd9432a422\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -376,6 +376,29 @@
 							"key": "processInstanceId",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Environments",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app/environments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app",
+						"environments"
 					]
 				}
 			},
