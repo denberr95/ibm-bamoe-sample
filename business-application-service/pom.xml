@@ -16,17 +16,18 @@
     </parent>
 
     <properties>
-        <version.org.kie>7.67.2.Final-redhat-00025</version.org.kie>
-        <version.org.kie.bamoe>8.0.6.redhat-00006</version.org.kie.bamoe>
+        <org.kie.version>7.67.2.Final-redhat-00025</org.kie.version>
+        <org.kie.bamoe.version>8.0.6.redhat-00006</org.kie.bamoe.version>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <narayana.version>5.9.0.Final</narayana.version>
-        <version.business-application-kjar>1.0.0-SNAPSHOT</version.business-application-kjar>
-        <version.opentelemetry-instrumentation-bom>2.12.0</version.opentelemetry-instrumentation-bom>
+        <business-application-kjar.version>1.0.0-SNAPSHOT</business-application-kjar.version>
+        <opentelemetry-instrumentation-bom.version>2.12.0</opentelemetry-instrumentation-bom.version>
         <postgresql.version>42.7.5</postgresql.version>
         <snakeyaml.version>2.3</snakeyaml.version>
+        <opentelemetry-samplers.version>1.43.0-alpha</opentelemetry-samplers.version>
     </properties>
 
     <dependencyManagement>
@@ -34,7 +35,7 @@
             <dependency>
                 <groupId>com.redhat.ba</groupId>
                 <artifactId>ba-platform-bom</artifactId>
-                <version>${version.org.kie.bamoe}</version>
+                <version>${org.kie.bamoe.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -48,7 +49,7 @@
             <dependency>
                 <groupId>io.opentelemetry.instrumentation</groupId>
                 <artifactId>opentelemetry-instrumentation-bom</artifactId>
-                <version>${version.opentelemetry-instrumentation-bom}</version>
+                <version>${opentelemetry-instrumentation-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -56,6 +57,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>io.opentelemetry.contrib</groupId>
+            <artifactId>opentelemetry-samplers</artifactId>
+            <version>${opentelemetry-samplers.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
@@ -72,7 +78,7 @@
         <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-server-spring-boot-starter</artifactId>
-            <version>${version.org.kie}</version>
+            <version>${org.kie.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -105,7 +111,7 @@
         <dependency>
             <groupId>com.pam.sample</groupId>
             <artifactId>business-application-kjar</artifactId>
-            <version>${version.business-application-kjar}</version>
+            <version>${business-application-kjar.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -133,7 +139,7 @@
             <plugin>
                 <groupId>org.kie</groupId>
                 <artifactId>kie-maven-plugin</artifactId>
-                <version>${version.org.kie}</version>
+                <version>${org.kie.version}</version>
                 <executions>
                     <execution>
                         <id>copy</id>
@@ -148,7 +154,7 @@
                         <artifactItem>
                             <groupId>com.pam.sample</groupId>
                             <artifactId>business-application-kjar</artifactId>
-                            <version>${version.business-application-kjar}</version>
+                            <version>${business-application-kjar.version}</version>
                         </artifactItem>
                     </artifactItems>
                 </configuration>
