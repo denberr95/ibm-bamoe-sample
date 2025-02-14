@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "22f1e50b-0d08-478d-aa5e-78ab37fb050c",
+		"name": "Timer Issue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4578942"
+	},
+	"item": [
+		{
+			"name": "Start Process",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"processName\": \"IssueTimerReproducer\",\n\t\"kjar\": \"business-application-kjar-1.0.0-SNAPSHOT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app/start-process",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app",
+						"start-process"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wake Up Signal 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"signalName\": \"Signal1\",\n\t\"correlationKey\": \"7db331b1-3a02-4b6b-9b19-47e7d1c87bdb\",\n\t\"processInstanceId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app/wake-up-signal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app",
+						"wake-up-signal"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
