@@ -42,7 +42,7 @@ In caso di utilizzo di altri IDE è necessario eseguire questi step:
 
     ```shell
     cd business-application-kjar
-    mvn clean install --file business-application-kjar/pom.xml
+    mvn clean install --file pom.xml
     ```
 
 - Compilare con maven l'applicazione:
@@ -63,4 +63,4 @@ In caso di utilizzo di altri IDE è necessario eseguire questi step:
         --detach
     ```
 
-- Avviare l'applicazione avendo aggiungendo questi argumenti alla vm `-Dspring.profiles.active=postgres`
+- Avviare l'applicazione avendo aggiungendo questi argomenti alla vm `-Dspring.profiles.active=postgres`

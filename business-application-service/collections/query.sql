@@ -1,8 +1,14 @@
-select *
-from nodeinstancelog
+select
+	a.id, 
+	a.log_date,
+	a.nodecontainerid, 
+	a.nodename, 
+	a.nodetype, 
+	a.type
+from nodeinstancelog a
 where 1 = 1
-and processinstanceid = 1
-order by id, nodeinstanceid;
+and a.processinstanceid = 1
+order by a.id, a.nodeinstanceid;
 
 select *
 from processinstanceinfo;
