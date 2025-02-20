@@ -1,7 +1,7 @@
 package com.pam.sample.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import com.pam.sample.model.StartProcessDTO;
 import com.pam.sample.model.StartProcessResponseDTO;
@@ -15,77 +15,54 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.context.Scope;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 @Service
 public class BusinessService {
 
-    private final Tracer tracer;
     private final ProcessService processService;
     private final CorrelationKeyFactory correlationKeyFactory =
             KieInternalServices.Factory.get().newCorrelationKeyFactory();
 
     private static final Logger log = LoggerFactory.getLogger(BusinessService.class);
 
-    public BusinessService(Tracer tracer, ProcessService processService) {
-        this.tracer = tracer;
+    public BusinessService(ProcessService processService) {
         this.processService = processService;
     }
 
     public StartProcessResponseDTO startProcess(final StartProcessDTO request) {
-        Span span = this.tracer.spanBuilder("BusinessService.startProcess").startSpan();
+        Span span = Span.current();
         StartProcessResponseDTO result = new StartProcessResponseDTO();
-        try (Scope scope = span.makeCurrent()) {
-            CorrelationKey newCorrelationKey =
-                    this.correlationKeyFactory.newCorrelationKey(UUID.randomUUID().toString());
-            final Long processInstanceId = this.processService.startProcess(request.getKjar(),
-                    request.getProcessName(), newCorrelationKey, request.getParameters());
-            log.info("Process started with processInstanceId: {} and correlationKey: {}",
-                    processInstanceId, newCorrelationKey.getName());
-            result.setCorrelationKey(newCorrelationKey.getName());
-            result.setProcessInstanceId(processInstanceId);
-            span.addEvent("Process started");
-            span.setAttribute(Constants.SPAN_KEY_PROCESS_NAME, request.getProcessName());
-            span.setAttribute(Constants.SPAN_KEY_PROCESS_INSTANCE_ID, processInstanceId);
-            span.setAttribute(Constants.SPAN_KEY_CORRELATION_KEY, newCorrelationKey.getName());
-        } finally {
-            span.end();
-        }
+        CorrelationKey newCorrelationKey =
+                this.correlationKeyFactory.newCorrelationKey(UUID.randomUUID().toString());
+        final Long processInstanceId = this.processService.startProcess(request.getKjar(),
+                request.getProcessName(), newCorrelationKey, request.getParameters());
+        log.info("Process started with processInstanceId: {} and correlationKey: {}",
+                processInstanceId, newCorrelationKey.getName());
+        result.setCorrelationKey(newCorrelationKey.getName());
+        result.setProcessInstanceId(processInstanceId);
+        span.addEvent("Process started");
+        span.setAttribute(Constants.SPAN_KEY_PROCESS_NAME, request.getProcessName());
+        span.setAttribute(Constants.SPAN_KEY_PROCESS_INSTANCE_ID, processInstanceId);
+        span.setAttribute(Constants.SPAN_KEY_CORRELATION_KEY, newCorrelationKey.getName());
         return result;
     }
 
     public void wakeUpSignal(final WakeUpSignalDTO request) {
-        String classAndMethod =
-                StackWalker.getInstance()
-                        .walk(frames -> frames
-                                .dropWhile(f -> f.getClassName().startsWith("java.")
-                                        || f.getClassName().startsWith("jdk."))
-                                .findFirst().map(f -> {
-                                    String className = f.getClassName()
-                                            .substring(f.getClassName().lastIndexOf('.') + 1);
-                                    return className + "." + f.getMethodName();
-                                }).orElse("UnknownMethod"));
-        Span span = this.tracer.spanBuilder(classAndMethod).startSpan();
-        try (Scope scope = span.makeCurrent()) {
-            this.processService.signalProcessInstance(request.getProcessInstanceId(),
-                    request.getSignalName(), request.getParameters());
-            log.info("Signal activated !");
-            span.addEvent("Signal activated");
-            span.setAttribute(Constants.SPAN_KEY_SIGNAL_NAME, request.getSignalName());
-            span.setAttribute(Constants.SPAN_KEY_PROCESS_INSTANCE_ID,
-                    request.getProcessInstanceId());
-            span.setAttribute(Constants.SPAN_KEY_CORRELATION_KEY, request.getCorrelationKey());
-        } finally {
-            span.end();
-        }
+        Span span = Span.current();
+        this.processService.signalProcessInstance(request.getProcessInstanceId(),
+                request.getSignalName(), request.getParameters());
+        log.info("Signal activated with processInstanceId: '{}' !", request.getProcessInstanceId());
+        span.addEvent("Signal activated");
+        span.setAttribute(Constants.SPAN_KEY_SIGNAL_NAME, request.getSignalName());
+        span.setAttribute(Constants.SPAN_KEY_PROCESS_INSTANCE_ID, request.getProcessInstanceId());
+        span.setAttribute(Constants.SPAN_KEY_CORRELATION_KEY, request.getCorrelationKey());
     }
 
     @WithSpan
-    public List<String> environments() {
-        List<String> result = new ArrayList<>();
-        System.getenv().forEach((k, v) -> result.add(new String(v.getBytes())));
+    public Map<String, String> environments() {
+        Map<String, String> result = new HashMap<>();
+        System.getenv().forEach(result::put);
         return result;
     }
 }

@@ -7,402 +7,488 @@
 	},
 	"item": [
 		{
-			"name": "Get Server",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Containers",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server/containers",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server",
-						"containers"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Returns node instances for the specified process instance",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances/:processInstanceId/nodes/instances",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server",
-						"containers",
-						":containerId",
-						"processes",
-						"instances",
-						":processInstanceId",
-						"nodes",
-						"instances"
-					],
-					"variable": [
-						{
-							"key": "containerId",
-							"value": "business-application-kjar-1.0.0-SNAPSHOT"
-						},
-						{
-							"key": "processInstanceId",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Processes",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server",
-						"containers",
-						":containerId",
-						"processes"
-					],
-					"variable": [
-						{
-							"key": "containerId",
-							"value": "business-application-kjar-1.0.0-SNAPSHOT"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Start Async Reproducer",
-			"event": [
+			"name": "Kie Server",
+			"item": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
+					"name": "Get Server",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"processName\": \"AsyncTaskReproducer\",\n\t\"kjar\": \"business-application-kjar-1.0.0-SNAPSHOT\",\n\t\"parameters\": {\n\t\t\"codicePraticaHub\": \"{{$guid}}\"\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app/start-process",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app",
-						"start-process"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Custom Wake Up Signal",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"c3f934bd-27af-46ce-9e2e-a4dd9432a422\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Get Containers",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
 						}
-					}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/containers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"containers"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app/wake-up-signal",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app",
-						"wake-up-signal"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Variables By Process Instance ID",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances/:processInstanceId/variables",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server",
-						"containers",
-						":containerId",
-						"processes",
-						"instances",
-						":processInstanceId",
-						"variables"
-					],
-					"variable": [
-						{
-							"key": "containerId",
-							"value": "business-application-kjar-1.0.0-SNAPSHOT"
+				{
+					"name": "Returns node instances for the specified process instance",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances/:processInstanceId/nodes/instances",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"containers",
+								":containerId",
+								"processes",
+								"instances",
+								":processInstanceId",
+								"nodes",
+								"instances"
+							],
+							"variable": [
+								{
+									"key": "containerId",
+									"value": "business-application-kjar-1.0.0-SNAPSHOT"
+								},
+								{
+									"key": "processInstanceId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Processes",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"containers",
+								":containerId",
+								"processes"
+							],
+							"variable": [
+								{
+									"key": "containerId",
+									"value": "business-application-kjar-1.0.0-SNAPSHOT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Variables By Process Instance ID",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances/:processInstanceId/variables",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"containers",
+								":containerId",
+								"processes",
+								"instances",
+								":processInstanceId",
+								"variables"
+							],
+							"variable": [
+								{
+									"key": "containerId",
+									"value": "business-application-kjar-1.0.0-SNAPSHOT"
+								},
+								{
+									"key": "processInstanceId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Variable By Process Instance ID",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "true",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "processInstanceId",
-							"value": "1"
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances/:processInstanceId/variable/:variableId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"containers",
+								":containerId",
+								"processes",
+								"instances",
+								":processInstanceId",
+								"variable",
+								":variableId"
+							],
+							"variable": [
+								{
+									"key": "containerId",
+									"value": "business-application-kjar-1.0.0-SNAPSHOT"
+								},
+								{
+									"key": "processInstanceId",
+									"value": "2"
+								},
+								{
+									"key": "variableId",
+									"value": "isClose"
+								}
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Get Node Instance by Process Instance ID",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/admin/containers/:containerId/processes/instances/:processInstanceId/nodeinstances",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"admin",
+								"containers",
+								":containerId",
+								"processes",
+								"instances",
+								":processInstanceId",
+								"nodeinstances"
+							],
+							"variable": [
+								{
+									"key": "containerId",
+									"value": "business-application-kjar-1.0.0-SNAPSHOT"
+								},
+								{
+									"key": "processInstanceId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Update Variable By Process Instance ID",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "true",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Custom API",
+			"item": [
+				{
+					"name": "Start Async Reproducer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
-					}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"processName\": \"AsyncTaskReproducer\",\n\t\"kjar\": \"business-application-kjar-1.0.0-SNAPSHOT\",\n\t\"parameters\": {\n\t\t\"codicePraticaHub\": \"{{$guid}}\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app/start-process",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app",
+								"start-process"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances/:processInstanceId/variable/:variableId",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server",
-						"containers",
-						":containerId",
-						"processes",
-						"instances",
-						":processInstanceId",
-						"variable",
-						":variableId"
-					],
-					"variable": [
-						{
-							"key": "containerId",
-							"value": "business-application-kjar-1.0.0-SNAPSHOT"
+				{
+					"name": "Custom Wake Up Signal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"b7535dee-7ead-498f-af1e-af54d02fa956\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "processInstanceId",
-							"value": "2"
-						},
-						{
-							"key": "variableId",
-							"value": "isClose"
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app/wake-up-signal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app",
+								"wake-up-signal"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Get Environments",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app/environments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app",
+								"environments"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get Node Instance by Process Instance ID",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app-api/server/admin/containers/:containerId/processes/instances/:processInstanceId/nodeinstances",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app-api",
-						"server",
-						"admin",
-						"containers",
-						":containerId",
-						"processes",
-						"instances",
-						":processInstanceId",
-						"nodeinstances"
-					],
-					"variable": [
-						{
-							"key": "containerId",
-							"value": "business-application-kjar-1.0.0-SNAPSHOT"
-						},
-						{
-							"key": "processInstanceId",
-							"value": "1"
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "Get Actuators",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/bpm-business-app/actuator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"bpm-business-app",
+								"actuator"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Environments",
-			"request": {
-				"auth": {
-					"type": "noauth"
+					},
+					"response": []
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/bpm-business-app/environments",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bpm-business-app",
-						"environments"
-					]
+				{
+					"name": "Get Available Metrics",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/bpm-business-app/actuator/metrics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"bpm-business-app",
+								"actuator",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Prometheus Metrics",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/bpm-business-app/actuator/prometheus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"bpm-business-app",
+								"actuator",
+								"prometheus"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

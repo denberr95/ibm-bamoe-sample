@@ -11,7 +11,7 @@
         {
             "label": "mvn-install",
             "type": "shell",
-            "command": "mvn install --settings settings.xml",
+            "command": "mvn install --file pom.xml --settings settings.xml",
             "dependsOrder": "sequence",
             "dependsOn": [
                 "mvn-clean"

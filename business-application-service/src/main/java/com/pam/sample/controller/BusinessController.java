@@ -1,6 +1,6 @@
 package com.pam.sample.controller;
 
-import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import com.pam.sample.model.StartProcessDTO;
 import com.pam.sample.model.StartProcessResponseDTO;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import io.micrometer.core.annotation.Timed;
 
 @Validated
 @RestController
@@ -27,6 +28,7 @@ public class BusinessController {
         this.businessService = businessService;
     }
 
+    @Timed(value = "custom.start.process", description = "Time taken to start a process")
     @PostMapping(path = "start-process")
     public ResponseEntity<StartProcessResponseDTO> startProcess(
             @Valid @RequestBody final StartProcessDTO request) {
@@ -35,6 +37,7 @@ public class BusinessController {
                 .body(this.businessService.startProcess(request));
     }
 
+    @Timed(value = "custom.wake.up.signal", description = "Time taken to send a wake up signal")
     @PostMapping(path = "wake-up-signal")
     public ResponseEntity<Void> wakeUpSignal(@Valid @RequestBody final WakeUpSignalDTO request) {
         log.info("Wake Up signal: '{}'", request.getSignalName());
@@ -42,8 +45,10 @@ public class BusinessController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @Timed(value = "custom.environments",
+            description = "Time taken to retrieve list of environments")
     @GetMapping(path = "environments")
-    public ResponseEntity<List<String>> getEnvironmnets() {
+    public ResponseEntity<Map<String, String>> getEnvironmnets() {
         log.info("Retrieve list of environments");
         return ResponseEntity.status(HttpStatus.OK).body(this.businessService.environments());
     }
