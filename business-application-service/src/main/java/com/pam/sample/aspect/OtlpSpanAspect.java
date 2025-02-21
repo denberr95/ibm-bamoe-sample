@@ -20,7 +20,9 @@ public class OtlpSpanAspect {
         this.tracer = tracer;
     }
 
-    @Pointcut(value = "@within(org.springframework.stereotype.Service)")
+    @Pointcut("execution(* com.pam.sample.service..*(..)) || "
+            + "execution(* com.pam.sample.filter..*(..)) || "
+            + "execution(* com.pam.sample.util..*(..))")
     public void createSpanPointCut() {
         // Pointcut
     }
