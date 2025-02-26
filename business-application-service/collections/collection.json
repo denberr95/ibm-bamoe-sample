@@ -157,6 +157,154 @@
 					"response": []
 				},
 				{
+					"name": "Get Jobs",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/jobs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job LogCleanup Configuration",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/jobs/commands/:command",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"jobs",
+								"commands",
+								":command"
+							],
+							"variable": [
+								{
+									"key": "command",
+									"value": "org.jbpm.executor.commands.LogCleanupCommand"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Job LogCleanup",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"job-command\": \"org.jbpm.executor.commands.LogCleanupCommand\",\n\t\"scheduled-date\": {\n\t\t\"java.util.Date\": 1740579120\n\t},\n\t\"request-data\": {\n\t\t\"SkipProcessLog\": \"false\",\n\t\t\"SkipTaskLog\": \"false\",\n\t\t\"SkipExecutorLog\": \"false\",\n\t\t\"DateFormat\": \"yyyy-MM-dd\",\n\t\t\"SingleRun\": \"true\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/jobs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/jobs/:jobId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"jobs",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Variables By Process Instance ID",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -313,6 +461,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Abort Process Instance",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bpm-business-app-api/server/containers/:containerId/processes/instances?instanceId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bpm-business-app-api",
+								"server",
+								"containers",
+								":containerId",
+								"processes",
+								"instances"
+							],
+							"query": [
+								{
+									"key": "instanceId",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "containerId",
+									"value": "business-application-kjar-1.0.0-SNAPSHOT"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -367,7 +554,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"b7535dee-7ead-498f-af1e-af54d02fa956\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
+							"raw": "{\n\t\"signalName\": \"SignalX\",\n\t\"correlationKey\": \"22ff7960-369e-47cb-a486-e4b3daf37319\",\n\t\"processInstanceId\": 1,\n\t\"parameters\": {\n\t\t\"name\": \"denis\",\n\t\t\"surname\": \"berretti\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"

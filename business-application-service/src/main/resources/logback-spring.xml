@@ -37,6 +37,15 @@
         </encoder>
     </appender>
 
+    <appender name="FILE-QUERY" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/bpm-query.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>[%date]- [%message]%n%throwable</pattern>
+        </encoder>
+    </appender>
+
     <logger name="org.springframework" level="INFO" />
     <logger name="org.jboss" level="ERROR" />
     <logger name="org.xnio" level="ERROR" />
@@ -51,8 +60,17 @@
     <logger name="com.pam.sample" level="INFO" />
     <logger name="io.undertow" level="ERROR" />
     <logger name="org.hibernate" level="INFO" />
-    <logger name="io.micrometer" level="DEBUG" />
-    <logger name="io.opentelemetry" level="DEBUG" />
+    
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE-QUERY" />
+    </logger>
+
+    <logger name="org.hibernate.type" level="TRACE" additivity="false">
+        <appender-ref ref="FILE-QUERY" />
+    </logger>
+
+    <logger name="io.micrometer" level="INFO" />
+    <logger name="io.opentelemetry" level="INFO" />
     
     <root level="INFO">
         <appender-ref ref="CONSOLE-TEXT" />
