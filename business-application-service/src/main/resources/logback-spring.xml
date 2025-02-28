@@ -42,7 +42,7 @@
         <append>true</append>
         <immediateFlush>true</immediateFlush>
         <encoder>
-            <pattern>[%date]- [%message]%n%throwable</pattern>
+            <pattern>[%date] - [%message]%n%throwable</pattern>
         </encoder>
     </appender>
 
