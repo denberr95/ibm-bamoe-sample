@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "0d98f117-3a67-43dc-8ac9-bd8cbf5a3054",
+		"name": "Transaction Issue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4578942"
+	},
+	"item": [
+		{
+			"name": "Start Process",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"processInstanceId\", jsonData.processInstanceId);",
+							"pm.collectionVariables.set(\"correlationKey\", jsonData.correlationKey);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"processName\": \"TransactionIssue\",\n\t\"kjar\": \"business-application-kjar-1.0.0-SNAPSHOT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app/start-process",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app",
+						"start-process"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wake Up Signal 1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.get(\"correlationKey\");",
+							"pm.collectionVariables.get(\"processInstanceId\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"signalName\": \"Signal1\",\n\t\"correlationKey\": \"{{correlationKey}}\",\n\t\"processInstanceId\": \"{{processInstanceId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app/wake-up-signal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app",
+						"wake-up-signal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wake Up Signal 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.get(\"correlationKey\");",
+							"pm.collectionVariables.get(\"processInstanceId\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"signalName\": \"Signal2\",\n\t\"correlationKey\": \"{{correlationKey}}\",\n\t\"processInstanceId\": \"{{processInstanceId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bpm-business-app/wake-up-signal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bpm-business-app",
+						"wake-up-signal"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "processInstanceId",
+			"value": "0"
+		},
+		{
+			"key": "correlationKey",
+			"value": "N/A"
+		}
+	]
+}

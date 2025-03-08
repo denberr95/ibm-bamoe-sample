@@ -9,6 +9,10 @@ services:
       POSTGRES_DB: bpm
       POSTGRES_HOST_AUTH_METHOD: trust
       TZ: Europe/Rome
+    command:
+    - "postgres"
+    - "-c"
+    - "max_prepared_transactions=100"
     ports:
     - "5432:5432" # serve database
     networks:
@@ -100,6 +104,21 @@ services:
     - "55679" # zpages extension
     depends_on:
     - jaeger
+    networks:
+    - jbpm-dev
+
+  artemis:
+    image: apache/activemq-artemis:latest
+    restart: "no"
+    environment:
+      TZ: Europe/Rome
+      ARTEMIS_USER: artemis
+      ARTEMIS_PASSWORD: artemis
+      ANONYMOUS_LOGIN: true
+      #EXTRA_ARGS:
+    ports:
+    - "61616:61616" # serve headless
+    - "8161:8161" # serve web gui
     networks:
     - jbpm-dev
 
